@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soldatische Fitness – Leseverstehen A1</title>
+<meta name="description" content="Soldatische Fitness – Leseverstehen A1 mit Comic und 20 Richtig-Falsch-Fragen.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Soldatische Fitness – Leseverstehen A1">
+<meta property="og:description" content="Mein Weg zur körperlichen Fitness – Comic und interaktive Übung.">
+<meta property="og:image" content="Comic-Soldatische-Fitness.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="Comic-Soldatische-Fitness.png">
+
+<style>
+:root{--green:#1f5a3c;--pale:#edf6e9;--line:#d7e3d4;--ink:#17251d;--right:#dff4df;--wrong:#ffe5e2}
+*{box-sizing:border-box}
+body{margin:0;background:#f5f7f3;color:var(--ink);font:17px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:850px;margin:0 auto;padding:20px 14px 40px}
+header{background:var(--green);color:white;padding:24px 20px;border-radius:16px;margin-bottom:18px}
+h1{font-size:clamp(1.6rem,5vw,2.3rem);line-height:1.15;margin:0 0 8px}
+header p{margin:0}
+.instructions,.question,.result{background:white;border:1px solid var(--line);border-radius:12px;padding:16px;margin:12px 0}
+.instructions{background:var(--pale)}
+.question p{margin:0 0 12px}
+.num{font-weight:750;color:var(--green);margin-right:7px}
+.choices{display:flex;gap:10px;flex-wrap:wrap}
+label.choice{display:inline-flex;align-items:center;gap:7px;border:1px solid #b8c8b7;border-radius:9px;padding:7px 14px;cursor:pointer}
+label.choice:has(input:checked){background:#e7f1e5;border-color:var(--green)}
+input{accent-color:var(--green);width:18px;height:18px}
+.question.correct{border-color:#6eb576;background:var(--right)}
+.question.incorrect{border-color:#d98c83;background:var(--wrong)}
+.feedback{font-size:.94rem;font-weight:650;margin-top:9px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+button{border:0;border-radius:10px;padding:12px 18px;font:inherit;font-weight:700;cursor:pointer}
+.primary{background:var(--green);color:white}
+.secondary{background:#e7ece5;color:var(--ink)}
+button:focus-visible,label:focus-within{outline:3px solid #6ba8d5;outline-offset:2px}
+.result{display:none;background:var(--pale);font-weight:700;font-size:1.15rem}
+.small{font-size:.9rem;color:#4c5b50}
+footer{text-align:center;color:#58665b;font-size:.85rem;margin-top:24px}
+@media(min-width:650px){.question{padding:18px 20px}}
+.comic{background:white;border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:18px}.comic img{display:block;width:100%;height:auto;border-radius:5px}.comic summary{cursor:pointer;font-weight:700;color:var(--green);padding:10px 0}.comic a{color:var(--green)}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h1>Soldatische Fitness – Leseverstehen A1</h1>
+<p>Meine Sportausbildung in der Grundausbildung</p>
+</header>
+<section class="instructions">
+<strong>Aufgabe:</strong> Lies den Comic „Mein Weg zur körperlichen Fitness“. Sind die Aussagen richtig oder falsch? Wähle eine Antwort aus und klicke am Ende auf <strong>„Antworten prüfen“</strong>.
+<p class="small">Du kannst deine Antworten danach ändern und die Übung wiederholen.</p>
+</section>
+<section class="comic"><h2>1. Lies den Comic</h2><p>Sieh dir die Bilder und Sprechblasen an. Du kannst das Bild mit einem Klick in einem neuen Tab größer öffnen.</p><a href="Comic-Soldatische-Fitness.png" target="_blank" aria-label="Comic in neuem Tab öffnen"><img src="Comic-Soldatische-Fitness.png" alt="Comic: Mein Weg zur körperlichen Fitness. Erfahrungsbericht eines Rekruten über seine Sportausbildung."></a></section><h2>2. Richtig oder falsch?</h2>
+<form id="quiz" autocomplete="off">
+<div id="questions"></div>
+<div class="actions">
+<button class="primary" type="submit">Antworten prüfen</button>
+<button class="secondary" type="button" id="reset">Neu beginnen</button>
+</div>
+</form>
+<div id="result" class="result" role="status" aria-live="polite"></div>
+<footer>Übung zum selbstständigen Lernen · Niveau A1</footer>
+</main>
+<script>
+const questions = [
+["Am ersten Tag in der Kaserne war der Rekrut ganz ruhig.", "F"],
+["Die Soldaten mussten jeden Tag laufen.", "R"],
+["Das Laufen war für den Rekruten sehr leicht.", "F"],
+["Die Soldaten mussten auch 100 Meter sprinten.", "R"],
+["Beim Krafttraining haben die Soldaten Liegestütze und Kniebeugen gemacht.", "R"],
+["Der Rekrut hat jeden Tag weniger Kraft gehabt.", "F"],
+["Das Training mit der Kettlebell war neu für den Rekruten.", "R"],
+["Am Anfang konnte der Rekrut schon zehn Klimmzüge machen.", "F"],
+["Nach ein paar Tagen hat er fünf Klimmzüge geschafft.", "R"],
+["Auf der Hindernisbahn mussten die Soldaten über einen Balken klettern.", "R"],
+["Die Soldaten mussten über den Draht springen.", "F"],
+["Das Klettern am Seil war für den Rekruten sehr einfach.", "F"],
+["Die Soldaten haben auch schwere Sandsäcke getragen.", "R"],
+["Beim Handgranatenwurf musste der Rekrut eine Übungshandgranate werfen.", "R"],
+["Beim Marsch hatten die Soldaten kein Gepäck.", "F"],
+["Am Ende mussten die Soldaten auch schwimmen.", "R"],
+["Der Schwimmtest war für den Rekruten sehr leicht.", "F"],
+["Der Rekrut hatte nach dem Sport oft Muskelkater.", "R"],
+["Nach der Ausbildung war der Rekrut schwächer als vorher.", "F"],
+["Der Rekrut war am Ende stolz auf sich.", "R"]
+];
+const container = document.getElementById("questions");
+questions.forEach((item,i)=>{
+  const div=document.createElement("section");
+  div.className="question";
+  div.id="q"+i;
+  div.innerHTML=`<p><span class="num">${i+1}.</span>${item[0]}</p>
+  <div class="choices" role="group" aria-label="Aussage ${i+1}">
+    <label class="choice"><input type="radio" name="q${i}" value="R"> Richtig</label>
+    <label class="choice"><input type="radio" name="q${i}" value="F"> Falsch</label>
+  </div><div class="feedback" aria-live="polite"></div>`;
+  container.appendChild(div);
+});
+document.getElementById("quiz").addEventListener("submit",e=>{
+  e.preventDefault();
+  let score=0, unanswered=0;
+  questions.forEach((item,i)=>{
+    const chosen=document.querySelector(`input[name="q${i}"]:checked`);
+    const card=document.getElementById("q"+i);
+    const feedback=card.querySelector(".feedback");
+    card.classList.remove("correct","incorrect");
+    if(!chosen){unanswered++;feedback.textContent="Bitte wähle eine Antwort.";return;}
+    const ok=chosen.value===item[1];
+    if(ok)score++;
+    card.classList.add(ok?"correct":"incorrect");
+    feedback.textContent=ok?"Richtig!":"Noch nicht richtig. Richtige Antwort: "+(item[1]==="R"?"Richtig":"Falsch")+".";
+  });
+  const result=document.getElementById("result");
+  result.style.display="block";
+  result.textContent=`Dein Ergebnis: ${score} von ${questions.length} richtig.`+(unanswered?` Noch ${unanswered} ${unanswered===1?"Frage ist":"Fragen sind"} offen.`:"");
+  result.scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+document.getElementById("reset").addEventListener("click",()=>{
+  document.getElementById("quiz").reset();
+  document.querySelectorAll(".question").forEach(card=>{card.classList.remove("correct","incorrect");card.querySelector(".feedback").textContent="";});
+  const result=document.getElementById("result");result.style.display="none";result.textContent="";
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+</script>
+</body>
+</html>
