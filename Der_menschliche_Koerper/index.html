@@ -1,0 +1,69 @@
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Der menschliche Körper – interaktive Zuordnung</title><meta name="description" content="Drei interaktive Drag-and-Drop-Aufgaben zu Körperteilen, Kopf und Organen für Deutsch A1–A2."><style>
+:root{--blue:#07519b;--line:#bfd6ed;--pale:#eff7ff}*{box-sizing:border-box}
+body{margin:0;background:#f2f7fd;color:#142943;font:16px/1.45 system-ui,Arial,sans-serif}
+header{background:linear-gradient(115deg,#06458d,#1476c6);color:white;padding:25px max(18px,calc((100vw - 1120px)/2))}
+h1{margin:0;font-size:clamp(28px,4vw,42px)}header p{margin:4px 0 0}
+main{max-width:1160px;margin:auto;padding:20px 14px 50px}
+.task{background:#fff;border:1px solid #c6d9ed;border-radius:16px;padding:20px;margin:0 0 28px;box-shadow:0 4px 16px #12345a10}
+h2{color:#07519b;margin:0 0 4px}.intro{margin:0 0 15px;color:#40566d}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(162px,1fr));gap:12px}
+.tile{border:1px solid var(--line);border-radius:12px;background:#fbfdff;overflow:hidden;min-width:0}
+.tile img{width:100%;height:155px;object-fit:contain;display:block;background:#fff}
+.choice{border-top:1px solid #dbe9f7;padding:10px 8px}
+.answer{display:flex;gap:7px;align-items:center}.article{font-weight:800;flex-shrink:0;color:#153e73}
+.drop{min-height:43px;min-width:0;flex:1;border:2px dashed #8ab0d9;border-radius:8px;background:#f5faff;display:flex;align-items:center;justify-content:center;padding:5px;text-align:center;cursor:pointer;font-weight:700;font-size:14px;color:#153e73}
+.drop:empty:before{content:'Wort hier ablegen';font-size:11px;font-weight:500;color:#7b8fa6}
+.drop.active{background:#d9edff;border-color:#0766b7}.drop:focus-visible,.word:focus-visible{outline:3px solid #f2a900;outline-offset:2px}
+.wordbank{background:#eaf5ff;border:1px solid #b9d9f2;border-radius:12px;padding:14px;margin-top:17px}
+.wordbank.floating{position:fixed;bottom:8px;left:50%;transform:translateX(-50%);width:min(1120px,calc(100vw - 24px));z-index:100;max-height:34vh;overflow-y:auto;box-shadow:0 4px 28px #173c6080;border:2px solid #448ed0;margin:0;padding:10px 13px}
+.wordbank.floating .help{display:none}
+.wordbank.floating strong{margin-bottom:5px}
+.wordbank.floating .word{padding:5px 9px;font-size:13px}
+.bank-slot{min-height:90px}
+.wordbank strong{display:block;color:#064b92;margin-bottom:10px}.words{display:flex;flex-wrap:wrap;gap:8px;min-height:44px}
+.word{border:1px solid #7daeda;border-radius:8px;background:#fff;color:#153e73;padding:8px 11px;font-weight:700;font-size:14px;cursor:grab;touch-action:manipulation;user-select:none}
+.word.selected{background:#07519b;color:#fff;border-color:#07519b;box-shadow:0 0 0 3px #b6d9f7}
+.word.used{display:none}.drop .word{padding:5px 6px;border:0;background:transparent;cursor:grab;font-size:14px;max-width:100%;overflow-wrap:anywhere}
+.drop .word.selected{background:#07519b;color:#fff}
+.tile.correct{border:2px solid #2c9963;background:#f4fff8}.tile.wrong{border:2px solid #c64a42;background:#fff8f7}
+.feedback{min-height:18px;font-size:12px;font-weight:700;margin-top:5px}.correct .feedback{color:#176d45}.wrong .feedback{color:#a52e2e}
+.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:15px}
+button{border:0;border-radius:9px;padding:11px 16px;background:#08569f;color:#fff;font-size:15px;font-weight:700;cursor:pointer}
+button.secondary{background:#e4edf7;color:#174a7b}.result{font-weight:800;color:#164f88}
+.help{font-size:14px;color:#425b74;margin:6px 0 0}footer{text-align:center;color:#63758a;padding:0 15px 25px}
+@media(max-width:520px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.task{padding:12px}.tile img{height:125px}.choice{padding:7px 5px}.drop{min-height:42px}.word{padding:7px 9px;font-size:13px}.drop .word{font-size:12px}.article{font-size:13px}}
+</style></head><body><header><h1>Der menschliche Körper</h1><p>Interaktive Zuordnungsübungen · A1–A2</p></header><main><p>Sehen Sie die Zeichnungen an und ordnen Sie die Wörter den Bildern zu. Der Artikel steht bereits vor dem Antwortfeld.</p><div id="tasks"></div></main><footer>Deutsch als Fremdsprache · Der menschliche Körper</footer><script>
+const tasks=[{"title": "Aufgabe 1 – Körperteile", "desc": "Ordnen Sie jedem Bild das richtige Wort zu.", "prefix": "Koerperteil", "names": ["Kopf", "Hals", "Schulter", "Arm", "Brustkorb", "Ellenbogen", "Hand", "Finger", "Daumen", "Hüfte", "Knie", "Bein", "Oberschenkel", "Fuß", "Knöchel", "Zehen", "Rücken", "Gesäß (der Po)", "Bauch", "Rippen"], "articles": ["der", "der", "die", "der", "der", "der", "die", "die", "der", "die", "das", "das", "der", "der", "der", "die", "der", "das", "der", "die"]}, {"title": "Aufgabe 2 – Der Kopf", "desc": "Wie heißen die Teile des Gesichts und des Kopfes?", "prefix": "Kopf", "names": ["Auge", "Nase", "Mund", "Ohr", "Lippe", "Stirn", "Wange", "Kinn"], "articles": ["das", "die", "der", "das", "die", "die", "die", "das"]}, {"title": "Aufgabe 3 – Organe und Körperstrukturen", "desc": "Ordnen Sie jedem Bild das richtige Wort zu.", "prefix": "Organ", "names": ["Magen", "Darm", "Lunge", "Leber", "Niere", "Herz", "Gehirn", "Knochen", "Wirbelsäule", "Muskeln", "Sehnen", "Blutgefäße", "Haut", "Gelenk", "Blase", "Bauchspeicheldrüse"], "articles": ["der", "der", "die", "die", "die", "das", "das", "die", "die", "die", "die", "die", "die", "das", "die", "die"]}];
+const collator=new Intl.Collator('de',{sensitivity:'base'});
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let selected=null;
+function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
+function deselect(){document.querySelectorAll('.word.selected').forEach(x=>x.classList.remove('selected'));selected=null;}
+function getTaskSection(el){return el.closest('.task')}
+function resetFeedback(section){section.querySelectorAll('.tile').forEach(t=>{t.classList.remove('correct','wrong');t.querySelector('.feedback').textContent=''});section.querySelector('.result').textContent='';}
+function moveWord(word,drop){if(!word||!drop||getTaskSection(word)!==getTaskSection(drop))return;const old=word.closest('.drop');if(old===drop)return;const occupant=drop.querySelector('.word');if(occupant){if(old)old.appendChild(occupant);else drop.closest('.task').querySelector('.words').appendChild(occupant);}drop.appendChild(word);resetFeedback(getTaskSection(drop));deselect();}
+function returnWord(word){const section=getTaskSection(word);section.querySelector('.words').appendChild(word);resetFeedback(section);deselect();}
+function onWordClick(e){const word=e.currentTarget;if(selected===word){deselect();return;}deselect();selected=word;word.classList.add('selected');}
+function onDropClick(e){const drop=e.currentTarget;if(selected){moveWord(selected,drop);return;}const current=drop.querySelector('.word');if(current)onWordClick({currentTarget:current});}
+function updateFloatingBanks(){
+ const sections=[...document.querySelectorAll('.task')];
+ let active=null;
+ for(const s of sections){const r=s.getBoundingClientRect();if(r.top<innerHeight-85&&r.bottom>innerHeight*.35){active=s;break;}}
+ sections.forEach(s=>s.querySelector('.wordbank').classList.toggle('floating',s===active));
+}
+window.addEventListener('scroll',updateFloatingBanks,{passive:true});
+window.addEventListener('resize',updateFloatingBanks);
+function render(){const root=document.getElementById('tasks');root.innerHTML='';deselect();tasks.forEach((task,ti)=>{
+const section=document.createElement('section');section.className='task';section.dataset.task=ti;
+const indices=shuffle(task.names.map((_,i)=>i));const sorted=task.names.map((n,i)=>({n,i})).sort((a,b)=>collator.compare(a.n.replace(/ \(.*\)/,''),b.n.replace(/ \(.*\)/,'')));
+section.innerHTML=`<h2>${esc(task.title)}</h2><p class="intro">${esc(task.desc)} Ziehen Sie die Wörter in die passenden Felder.</p><div class="grid">${indices.map(i=>`<div class="tile" data-index="${i}"><img src="bilder/${task.prefix}_${String(i+1).padStart(2,'0')}.jpg" alt="Zeichnung zum Zuordnen" loading="lazy"><div class="choice"><div class="answer"><span class="article">${esc(task.articles[i])}</span><div class="drop" role="button" tabindex="0" aria-label="Antwortfeld für Körperbild"></div></div><div class="feedback" aria-live="polite"></div></div></div>`).join('')}</div><div class="bank-slot"><div class="wordbank"><strong>Wörter:</strong><div class="words">${sorted.map(({n,i})=>`<button type="button" class="word" draggable="true" data-word="${i}">${esc(n)}</button>`).join('')}</div><p class="help">Am Computer: Wörter ziehen. Auf dem Tablet: Wort antippen, dann das passende Feld antippen. Ein eingesetztes Wort kann zurück in die Wortliste.</p></div></div><div class="controls"><button class="check" type="button">Antworten prüfen</button><button class="secondary reset" type="button">Neu beginnen</button><span class="result" aria-live="polite"></span></div>`;
+root.appendChild(section);
+section.querySelectorAll('.word').forEach(w=>{w.addEventListener('click',onWordClick);w.addEventListener('dragstart',e=>{deselect();e.dataTransfer.setData('text/plain',w.dataset.word);e.dataTransfer.effectAllowed='move';window.draggingWord=w;});w.addEventListener('dragend',()=>window.draggingWord=null);});
+section.querySelectorAll('.drop').forEach(drop=>{drop.addEventListener('click',onDropClick);drop.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onDropClick({currentTarget:drop});}});drop.addEventListener('dragover',e=>{e.preventDefault();drop.classList.add('active')});drop.addEventListener('dragleave',()=>drop.classList.remove('active'));drop.addEventListener('drop',e=>{e.preventDefault();drop.classList.remove('active');moveWord(window.draggingWord,drop);});});
+const bank=section.querySelector('.words');bank.addEventListener('dragover',e=>e.preventDefault());bank.addEventListener('drop',e=>{e.preventDefault();if(window.draggingWord&&getTaskSection(window.draggingWord)===section)returnWord(window.draggingWord);});
+section.querySelector('.check').onclick=()=>check(section,task);
+section.querySelector('.reset').onclick=()=>{section.querySelectorAll('.drop .word').forEach(w=>bank.appendChild(w));resetFeedback(section);deselect();};
+});requestAnimationFrame(updateFloatingBanks);}
+function check(section,task){let correct=0,answered=0;section.querySelectorAll('.tile').forEach(tile=>{const i=Number(tile.dataset.index);const word=tile.querySelector('.drop .word');const fb=tile.querySelector('.feedback');tile.classList.remove('correct','wrong');if(!word){fb.textContent='Bitte zuordnen.';return;}answered++;if(Number(word.dataset.word)===i){correct++;tile.classList.add('correct');fb.textContent='✓ Richtig';}else{tile.classList.add('wrong');fb.textContent='✗ Richtig: '+task.articles[i]+' '+task.names[i];}});section.querySelector('.result').textContent=`${correct} von ${task.names.length} richtig · ${task.names.length-answered} nicht beantwortet`;}
+render();
+</script></body></html>
